@@ -14,7 +14,7 @@ Display the weather for your city on your sidebar. Select from layouts and colou
 * Select your country and city, check [openweather.com](http://openweather.com "Weather round the world") database of over 60,000 cities
 * Select from a range of small to large widget designs
 * Select centigrade or fahrenheit
-
+* Examples of the weather widgets can be found at [openweather.com/wordpress](http://www.openweather.com/wordpress.phtml "wordpress weather plugins") 
 
 == Installation ==
 
@@ -44,7 +44,7 @@ Display the weather for your city on your sidebar. Select from layouts and colou
 
 
 = Is my city supported ? = 
-[openweather.com](http://openweather.com "Local Weather round the world") has 100,000 cities in its database
+[openweather.com](http://openweather.com "Local Weather round the world") has 60,000 cities in its database
 
 = Is there support  ? = 
 Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml) 
