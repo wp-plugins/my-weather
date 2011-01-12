@@ -1,5 +1,5 @@
 === My Weather ===
-Contributors: openweather.com
+Contributors: enclick
 Donate link: http://www.openweather.com
 Tags: weather, temperature, forecast, city weather forecast
 Tested up to: 3.0.4
