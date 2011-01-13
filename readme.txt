@@ -43,8 +43,11 @@ Display the weather for your city on your sidebar. Select from various layouts a
 == Frequently Asked Questions ==
 
 
-= Is my city supported ? = 
+= Widget does not appear = 
+Check the spelling and presence of your city in the database at [openweather.com](http://openweather.com "Local Weather round the world").
+
 [openweather.com](http://openweather.com "Local Weather round the world") has 60,000 cities in its database
 
 = Is there support  ? = 
-Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml) 
+Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml)
+
