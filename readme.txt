@@ -9,7 +9,7 @@ Stable tag: trunk
 
 == Description ==
 
-Display the weather for your city on your sidebar. Select from layouts and colours
+Display the weather for your city on your sidebar. Select from various layouts and designs
 
 * Select your country and city, check [openweather.com](http://openweather.com "Weather round the world") database of over 60,000 cities
 * Select from a range of small to large widget designs
