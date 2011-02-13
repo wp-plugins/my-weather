@@ -267,7 +267,7 @@ function my_weather_init()
 		elseif($typeflag == "weather1000") $typeflag="weather1001";
 	}
 
-	$widget_call_string = 'http://openweather.com/' . $typeflag;
+	$widget_call_string = 'http://weatherforecastmap.com/' . $typeflag;
 	$widget_call_string .= '.php?zona='.$country_name;
 	$widget_call_string .= '_'.$city;
 	$widget_call_string = str_replace(" ", "-", $widget_call_string);
