@@ -20,9 +20,11 @@ Display the weather for your city on your sidebar. Select from various layouts a
 
 1. Download the zip file and extract the contents,
 2. Upload the folder `my-weather` to your WP plugin folder `/wp-content/plugins/` directory,
-3. Go to Plugins > Installed, and activate the plugin,
+3. Go to Plugins > Plugins, and activate the plugin,
 4. Go to Appearance > Widgets, and drag the widget to a sidebar,
 5. Select the type, colors, country, city and size from the widget's setting menu
+6. Contact us at widgets at openweather.com or visit [openweather.com/support](http://www.openweather.com/wordpress.phtml)
+7. Please rate our plugin! 
 
 == Screenshots ==
 
@@ -49,5 +51,8 @@ Check the spelling and presence of your city in the database at [openweather.com
 [openweather.com](http://openweather.com "Local Weather round the world") has 60,000 cities in its database
 
 = Is there support  ? = 
-Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml)
+Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml) and [openweather.com/getwidget](http://www.openweather.com/getwidget.phtml#conditions)
+
+= Email = 
+Send us email to widgets at openweather.com, or follow us [twitter.com/openweather](http://twitter.com/openweather)
 
