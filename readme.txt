@@ -47,8 +47,12 @@ Display the weather for your city on your sidebar. Select from various layouts a
 
 = Widget does not appear = 
 Check the spelling and presence of your city in the database at [openweather.com](http://openweather.com "Local Weather round the world").
-
 [openweather.com](http://openweather.com "Local Weather round the world") has 60,000 cities in its database
+
+
+= Can I paste the weather widget directly into a page, into a post, not in the sidebar?= 
+Yes, the javascript is available directly from [openweather.com/getwidget](http://openweather.com/getwidget.phtml "Weather Widget"). You must paste the javascript into the post or template in HTML mode.
+
 
 = Is there support  ? = 
 Further support is available at [openweather.com/support](http://www.openweather.com/wordpress.phtml) and [openweather.com/getwidget](http://www.openweather.com/getwidget.phtml#conditions)
