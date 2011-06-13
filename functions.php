@@ -138,8 +138,6 @@ function print_textcolor_weather_list($text_color){
 
 function print_bordercolor_weather_list($text_color){
 
-print "<br> TEXT COLOR:"  . $text_color;
-
 	 $color_weather_list =array(
 	      "#FF0000" => "Red",
 	      "#CC033C" => "Crimson",
@@ -192,6 +190,7 @@ function print_backgroundcolor_weather_list($text_color){
 	       "#FFFCCC" => "Almond",
 	       "#F6F6CC" => "Beige",
 	       "#209020" => "Green",
+	       "#c3e44f" => "Light Green",
 	       "#963939" => "Brown",
 	       "#00FF00" => "Lime",
       	       "#99CCFF" => "Light Blue",

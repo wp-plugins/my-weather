@@ -3,140 +3,225 @@
 Plugin Name: My Weather
 Description: Display your city's weather on your sidebar. Choice of widget designs and sizes.
 Author: enclick
-Version: 1.0
+Version: 1.1
 Author URI: http://openweather.com
 Plugin URI: http://openweather.com/wordpress.phtml/
 */
 
+require_once("functions.php");
 
 
-function my_weather_init() 
+/**
+ * Add function to widgets_init that'll load our widget.
+ */
+
+add_action( 'widgets_init', 'load_my_weather' );
+
+/**
+ * Register our widget.
+ * 'my_weather' is the widget class used below.
+ *
+ */
+function load_my_weather() {
+        register_widget( 'my_weather' );
+}
+
+
+/*******************************************************************************************
+*
+*       My Weather class.
+*       This class handles everything that needs to be handled with the widget:
+*       the settings, form, display, and update.
+*
+*********************************************************************************************/
+class my_weather extends WP_Widget
 {
 
-     if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
-    	   return; 
+      /*******************************************************************************************
+      *
+      *
+      * Widget setup.
+      *
+      *
+      ********************************************************************************************/
+      function my_weather() 
+      {
+                #Widget settings
+                $widget_ops = array( 'description' => __('A widget that displays your city weather', 'my_weather') );
 
-    function my_weather_control() 
-    {
+                #Widget control settings
+                $control_ops = array( 'width' => 200, 'height' => 550, 'id_base' => 'my_weather' );
 
-        $newoptions = get_option('my_weather');
-    	$options = $newoptions;
-	$options_flag=0;
-
-
-    	if ( empty($newoptions) )
-	{
-	   $options_flag=1;
-      	   $newoptions = array(
-	   	'title'=>'London Weather',
-           	'titleflag'=>'1', 
-           	'transparentflag'=>'0', 
-           	'fahrenheitflag'=>'0', 
-           	'country' => 'GB',
-           	'country_name' => 'United Kingdom',
-           	'city' => 'London',
-           	'size' => '150',
-           	'type' => 'medium',
-           	'typeflag' => 'weather100',
-           	'text_color' => '#000000',
-           	'border_color' => '#963939',
-           	'background_color' => '#FFFFFF'
-	   );
-	}
-
-	if ( $_POST['my-weather-submit'] ) {
-	     $options_flag=1;
-              $newoptions['title'] = strip_tags(stripslashes($_POST['my-weather-title']));
-              $newoptions['titleflag'] = strip_tags(stripslashes($_POST['my-weather-titleflag']));
-              $newoptions['transparentflag'] = strip_tags(stripslashes($_POST['my-weather-transparentflag']));
-              $newoptions['fahrenheitflag'] = strip_tags(stripslashes($_POST['my-weather-fahrenheitflag']));
-              $newoptions['country'] = strip_tags(stripslashes($_POST['my-weather-country']));
-              $newoptions['city'] = strip_tags(stripslashes($_POST['my-weather-city']));
-              $newoptions['country_name'] = strip_tags(stripslashes($_POST['my-weather-country_name']));
-              $newoptions['size'] = strip_tags(stripslashes($_POST['my-weather-size']));
-              $newoptions['type'] = strip_tags(stripslashes($_POST['my-weather-type']));
-              $newoptions['typeflag'] = strip_tags(stripslashes($_POST['my-weather-typeflag']));
-              $newoptions['text_color'] = strip_tags(stripslashes($_POST['my-weather-text-color']));
-              $newoptions['border_color'] = strip_tags(stripslashes($_POST['my-weather-border-color']));
-              $newoptions['background_color'] = strip_tags(stripslashes($_POST['my-weather-background-color']));
+                #Create the widget
+                $this->WP_Widget( 'my_weather', __('My Weather', 'my_weather'), $widget_ops, $control_ops );
         }
 
-      	if ( $options_flag ==1 ) {
-              $options = $newoptions;
-              update_option('my_weather', $options);
-      	}
 
-      	// Extract value from vars
-      	$title = htmlspecialchars($options['title'], ENT_QUOTES);
-      	$titleflag = htmlspecialchars($options['titleflag'], ENT_QUOTES);
-      	$transparent_flag = htmlspecialchars($options['transparentflag'], ENT_QUOTES);
-      	$fahrenheit_flag = htmlspecialchars($options['fahrenheitflag'], ENT_QUOTES);
-      	$country = htmlspecialchars($options['country'], ENT_QUOTES);
-      	$country_name = htmlspecialchars($options['country_name'], ENT_QUOTES);
-      	$city = htmlspecialchars($options['city'], ENT_QUOTES);
-      	$size = htmlspecialchars($options['size'], ENT_QUOTES);
-      	$type = htmlspecialchars($options['type'], ENT_QUOTES);
-      	$typeflag = htmlspecialchars($options['typeflag'], ENT_QUOTES);
-      	$text_color = htmlspecialchars($options['text_color'], ENT_QUOTES);
-      	$border_color = htmlspecialchars($options['border_color'], ENT_QUOTES);
-      	$background_color = htmlspecialchars($options['background_color'], ENT_QUOTES);
+        /*******************************************************************************************
+        *
+        *
+        *	 Update the widget settings.
+        *
+        *
+        *******************************************************************************************/
+        function update( $new_instance, $old_instance )
+        {
+                $instance = $old_instance;
+		
+              $city = strip_tags(stripslashes($new_instance['city']));
+              $instance['city'] = $city;
 
-      	echo '<ul><li style="text-align:center;list-style: none;"><label for="my-weather-title">Weather<br> by <a href="http://openweather.com">openweather.com</a></label></li>';
+	      if($city)
+		$instance['title'] = $city . " Weather";
+	      else
+		$instance['title'] = strip_tags(stripslashes($new_instance['title']));
+
+              $instance['tflag'] = strip_tags(stripslashes($new_instance['tflag']));
+              $transparentflag = strip_tags(stripslashes($new_instance['transparentflag']));
+	      $instance['transparentflag'] = $transparentflag;
+              $instance['fahrenheitflag'] = strip_tags(stripslashes($new_instance['fahrenheitflag']));
+              $instance['country'] = strip_tags(stripslashes($new_instance['country']));
+
+              $instance['country_name'] = strip_tags(stripslashes($new_instance['country_name']));
+              $instance['size'] = strip_tags(stripslashes($new_instance['size']));
+              $instance['type'] = strip_tags(stripslashes($new_instance['type']));
+              $instance['typeflag'] = strip_tags(stripslashes($new_instance['typeflag']));
+
+	      if ($transparentflag == 0)
+	      {
+		   $instance['text_color'] = "#000000";
+		   $instance['background_color'] = "#FFFFFF";
+	      }
+	      else
+	      {
+		   $instance['text_color'] = strip_tags(stripslashes($new_instance['text_color']));
+              	   $instance['border_color'] = strip_tags(stripslashes($new_instance['border_color']));	
+              	   $instance['background_color'] = strip_tags(stripslashes($new_instance['background_color']));
+	      }
+
+	      return $instance;
+
+	}
 
 
-       	// Get country, state, city
+	/*******************************************************************************************
+         *
+         *      Displays the widget settings controls on the widget panel.
+         *      Make use of the get_field_id() and get_field_name() function
+         *      when creating your form elements. This handles the confusing stuff.
+         *
+         *
+         ********************************************************************************************/
+        function form( $instance )
+        {
+                #
+                #       Set up some default widget settings
+                #
 
-       	echo '<li style="list-style: none;"><label for="my-weather-country">Country:'.
-               '<select id="my-weather-country" name="my-weather-country" style="width:90%">';
+      	   	$default = array(
+	   		 'title'=>'London Weather',
+           		 'tflag'=>'1', 
+           		 'transparentflag'=>'0', 
+           		 'fahrenheitflag'=>'0', 
+           		 'country' => 'GB',
+           		 'country_name' => 'United Kingdom',
+           		 'city' => 'London',
+           		 'size' => '150',
+           		 'type' => 'medium',
+           		 'typeflag' => 'weather100',
+           		 'text_color' => '#000000',
+           		 'border_color' => '#963939',
+           		 'background_color' => '#FFFFFF'
+	   	);
 
+
+
+          	if(!isset($instance['country']))
+                        $instance = $default;
+
+
+
+      		// Extract value from vars
+      		$title = htmlspecialchars($instance['title'], ENT_QUOTES);
+      		$tflag = htmlspecialchars($instance['tflag'], ENT_QUOTES);
+      		$transparent_flag = htmlspecialchars($instance['transparentflag'], ENT_QUOTES);
+      		$fahrenheit_flag = htmlspecialchars($instance['fahrenheitflag'], ENT_QUOTES);
+      		$country = htmlspecialchars($instance['country'], ENT_QUOTES);
+      		$country_name = htmlspecialchars($instance['country_name'], ENT_QUOTES);
+      		$city = htmlspecialchars($instance['city'], ENT_QUOTES);
+      		$type = htmlspecialchars($instance['type'], ENT_QUOTES);
+      		$typeflag = htmlspecialchars($instance['typeflag'], ENT_QUOTES);
+      		$text_color = htmlspecialchars($instance['text_color'], ENT_QUOTES);
+      		$border_color = htmlspecialchars($instance['border_color'], ENT_QUOTES);
+      		$background_color = htmlspecialchars($instance['background_color'], ENT_QUOTES);
+      		
+		echo '<div style="align:center;text-align:center;margin-bottom:10px">';
+           	echo 'Weather<br> by <a href="http://openweather.com">openweather.com</a></div>';
+
+
+       		// Get country, state, city
+
+       	echo '<p><label for="' .$this->get_field_id( 'country' ). '">Country:';
+        echo '<select id="' .$this->get_field_id( 'country' ). '" name="' .$this->get_field_name( 'country' ). '"  style="width:90%">';
      	$country_name = print_thecountry_weather_list($country);
-      	echo '<input id="my-weather-country_name" name="my-weather-country_name" type="hidden" value="'.$country_name.'" />';
-      	echo '</select></label></li>';
-
-
-
+      	echo '</select></label></p>';
+	
+	echo '<label for="' .$this->get_field_id( 'country_name' ). '">';
+      	echo '<input id="' .$this->get_field_id( 'country_name' ). '" name="' .$this->get_field_name( 'country_name' ). '"  type="hidden" value="'.$country_name.'" /></label>';
        	// Get city
 
-        echo '<li style="list-style: none;"><label for="my-weather-city">City: <input style="width: 90%;" id="my-weather-city" name="my-weather-city" type="text" value="'.$city.'" /> </label></li><br>';
-
+        echo '<p><label for="' .$this->get_field_id( 'city' ). '">City: <input style="width: 90%;" id="' .$this->get_field_id( 'city' ). '" name="' .$this->get_field_name( 'city' ). '" type="text" value="'.$city.'" /> </label></p>';
 
 
       	// Set weather type
-      	echo '<li style="list-style: none;"><label for="my-weather-typeflag">'.'Widget Type:&nbsp;';
-       	echo '<select id="my-weather-typeflag" name="my-weather-typeflag"  style="width:125px" >';
+      	echo '<p><label for="' .$this->get_field_id( 'typeflag' ). '">'.'Widget Type:&nbsp;';
+       	echo '<select id="' .$this->get_field_id( 'typeflag' ). '" name="' .$this->get_field_name( 'typeflag' ). '"  style="width:125px" >';
       	print_type_weather_list($typeflag);
       	echo '</select></label>';
-      	echo '</li><br>';
-
-
-
-
-
-
+      	echo '</p>';
 
 	//   Transparent option
 
 	$transparent_checked = "";
-	if ($transparent_flag =="1")
+	if ($transparent_flag == 1)
 	   $transparent_checked = "CHECKED";
 
 	echo "\n";
-        echo '<li style="list-style: none;"><label for="my-weather-transparentflag"> Transparent: 
-	<input type="checkbox" id="my-weather-transparentflag" name="my-weather-transparentflag" value=1 '.$transparent_checked.' /> 
-	</label></li>';
+        echo '<p><label for="' .$this->get_field_id( 'transparentflag' ). '">Customize Colors: 
+	<input type="checkbox" id="' .$this->get_field_id( 'transparentflag' ). '" name="' .$this->get_field_name( 'transparentflag' ). '" value=1 '.$transparent_checked.' />* 
+	</label></p>';
 
 
-      	// Hidden "OK" button
-      	echo '<label for="my-weather-submit">';
-      	echo '<input id="my-weather-submit" name="my-weather-submit" type="hidden" value="Ok" />';
-      	echo '</label>';
+	if($transparent_flag == 1)
+	{
+		// Set Text Clock color
+     	 	echo '<p><label for="' .$this->get_field_id( 'text_color' ). '">'.'Text Color: &nbsp;';
+       	 	echo '<select id="' .$this->get_field_id( 'text_color' ). '" name="' .$this->get_field_name( 'text_color' ). '"  style="width:100px" >';
+         	print_textcolor_weather_list($text_color);
+         	echo '</select></label></p>';
+
+         	// Set Background Clock color
+         	echo '<p><label for="' .$this->get_field_id( 'background_color' ). '">'.'Background Color:&nbsp;';
+         	echo '<select id="' .$this->get_field_id( 'background_color' ). '" name="' .$this->get_field_name( 'background_color' ). '"  style="width:100px" >';
+         	print_backgroundcolor_weather_list($background_color);
+         	echo '</select></label></p>';
+	}
+	else{
+		echo '<label for="' .$this->get_field_id( 'text_color' ). '">';
+		echo '<input type="hidden" id="' .$this->get_field_id( 'text_color' ). '" name="' .$this->get_field_name( 'text_color' ) .'" value="#000000" /> </label>';
+
+        	echo '<label for="' .$this->get_field_id( 'background_color' ). '">';
+		echo '<input type="hidden" id="' .$this->get_field_id( 'background_color' ). '" name="' .$this->get_field_name( 'background_color' ) .'" value="#FFFFFF" /> </label>';
+	}
+
+
 
 
 	//	Title header option	
 
 	$title = UCWords($city) . " Weather";
 
-        echo '<label for="my-weather-title"> <input type="hidden" id="my-weather-title" name="my-weather-title" value="'.$title.'" /> </label>';
+        echo '<label for="' .$this->get_field_id( 'title' ). '"> <input type="hidden" id="' .$this->get_field_id( 'title' ). '" name="' .$this->get_field_name( 'title' ). '" value="'.$title.'" /> </label>';
 
 
 
@@ -150,17 +235,13 @@ function my_weather_init()
 	   $fahrenheit_checked = "CHECKED";
 
 	echo "\n";
-        echo '<li style="list-style: none;"><label for="my-weather-fahrenheitflag"> Centigrade/Fahrenheit: 
-	<input type="checkbox" id="my-weather-fahrenheitflag" name="my-weather-fahrenheitflag" value=1 '.$fahrenheit_checked.' /> 
-	</label></li>';
+        echo '<p><label for="' .$this->get_field_id( 'fahrenheitflag' ). '"> Centigrade/Fahrenheit: 
+	<input type="checkbox" id="' .$this->get_field_id( 'fahrenheitflag' ). '" name="' .$this->get_field_name( 'fahrenheitflag' ). '" value=1 '.$fahrenheit_checked.' /> 
+	</label></p>';
 
 
+	echo '<div style="font-size:9px">* save after selection</div>';
 
-	echo "\n";
-        echo '<li style="list-style: none;font-size:9px;text-align:left;margin:20px 0px 0px 0px">*Save after each selection</li>';
-
-
-	echo '</ul>';
 
 
     }
@@ -172,32 +253,29 @@ function my_weather_init()
     //
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-     function my_weather($args) 
+     function widget($args , $instance) 
      {
 
 	// Get values 
       	extract($args);
 
-      	$options = get_option('my_weather');
-
 
 	// Get Title,Location,Size,
 
-      	$title = htmlspecialchars($options['title'], ENT_QUOTES);
-      	$titleflag = htmlspecialchars($options['titleflag'], ENT_QUOTES);
-      	$transparentflag = htmlspecialchars($options['transparentflag'], ENT_QUOTES);
-      	$fahrenheitflag = htmlspecialchars($options['fahrenheitflag'], ENT_QUOTES);
-      	$country = htmlspecialchars($options['country'], ENT_QUOTES);
-      	$state = htmlspecialchars($options['state'], ENT_QUOTES);
-      	$country_name = htmlspecialchars($options['country_name'], ENT_QUOTES);
-      	$state_name = htmlspecialchars($options['state_name'], ENT_QUOTES);
-      	$city = htmlspecialchars($options['city'], ENT_QUOTES);
-      	$size = htmlspecialchars($options['size'], ENT_QUOTES);
-      	$type = htmlspecialchars($options['type'], ENT_QUOTES);
-      	$typeflag = htmlspecialchars($options['typeflag'], ENT_QUOTES);
-      	$text_color = htmlspecialchars($options['text_color'], ENT_QUOTES);
-      	$border_color = htmlspecialchars($options['border_color'], ENT_QUOTES);
-      	$background_color = htmlspecialchars($options['background_color'], ENT_QUOTES);
+      	$title = htmlspecialchars($instance['title'], ENT_QUOTES);
+      	$tflag = htmlspecialchars($instance['tflag'], ENT_QUOTES);
+      	$transparentflag = htmlspecialchars($instance['transparentflag'], ENT_QUOTES);
+      	$fahrenheitflag = htmlspecialchars($instance['fahrenheitflag'], ENT_QUOTES);
+      	$country = htmlspecialchars($instance['country'], ENT_QUOTES);
+      	$state = htmlspecialchars($instance['state'], ENT_QUOTES);
+      	$country_name = htmlspecialchars($instance['country_name'], ENT_QUOTES);
+      	$state_name = htmlspecialchars($instance['state_name'], ENT_QUOTES);
+      	$city = htmlspecialchars($instance['city'], ENT_QUOTES);
+      	$type = htmlspecialchars($instance['type'], ENT_QUOTES);
+      	$typeflag = htmlspecialchars($instance['typeflag'], ENT_QUOTES);
+      	$text_color = htmlspecialchars($instance['text_color'], ENT_QUOTES);
+      	$border_color = htmlspecialchars($instance['border_color'], ENT_QUOTES);
+      	$background_color = htmlspecialchars($instance['background_color'], ENT_QUOTES);
 
 
 	echo $before_widget; 
@@ -221,18 +299,17 @@ function my_weather_init()
 	$target_url = strtolower($target_url);
 
 
-	if($titleflag != 1){
+	if($tflag != 1){
 	      $noscript_start = "<noscript>";
 	      $noscript_end = "</noscript>";
 	}
 
 	if($typeflag == "weather2000") $width = "130px";
-	elseif($typeflag == "weather2") $width = "100%";
+	elseif($typeflag == "weather2") $width = "180px";
 	elseif($typeflag == "weather100") $width = "100%";
-	elseif($typeflag == "weather1") $width = "100%";
-	elseif($typeflag == "weather3") $width = "100%";
+	elseif($typeflag == "weather1") $width = "480px";
+	elseif($typeflag == "weather3") $width = "150px";
 	elseif($typeflag == "weather1000") $width = "150px";
-
 
 	echo'<!--Weather in '. $city . ' ' . $country_name0.' widget - HTML code - openweather.com --><center>';
 	
@@ -243,18 +320,23 @@ function my_weather_init()
 	      			  $header_html .= '<a title="'. $title. '" style="font-size:12px;text-decoration:none;color:#000" href="'.$target_url.'">&nbsp;&nbsp;'.$title.'</a>';
 	      }
 	      else{
-	      	     $header_html = '<div align="center" style="width:'.$width . ';border:1px solid #ccc;;font-weight:bold;margin:15px 0px 0px 0px;">';
-    			  $header_html .= '<a title="'. $title. '" style="font-size:12px;text-decoration:none;" href="'.$target_url.'">&nbsp;&nbsp;'.$title.'</a>';
+	      	     $header_html = '<div align="center" style="width:'.$width . ';border:1px solid #ccc;;font-weight:bold;margin:15px 0px 0px 0px;';
+		     $header_html .= 'background:'.$background_color.';text-color:'.$text_color.'">';
+		     $header_html .= '<a title="'. $title. '" style="font-size:12px;text-decoration:none;color:'.$text_color.'" href="'.$target_url.'">&nbsp;&nbsp;'.$title.'</a>';
               }
 
 	      $footer_html = "</div>";
 	}
 	elseif($typeflag == "weather2" || $typeflag == "weather100" || $typeflag == "weather1"  || $typeflag == "weather3"){
-	      $header_html = '<div align="center" style ="font-size:12px!important;margin:15px 0px 0px 0px;">';
+	      $header_html = '<div align="center" style ="font-size:12px!important;margin:15px 0px 0px 0px;line-height:18px;width:' . $width . ';';
+	      if($transparentflag ==1)
+	      		 $header_html .= 'border:1px solid #ccc;';
+	      $header_html .= 'background:'.$background_color.';text-color:'.$text_color.';color:'.$text_color.'">';
 	      $title2= $city . " Weather Forecast";
 	      if($typeflag == "weather1")
 	      		   $title2= "Current Weather in " . $city;
-	      $footer_html = '<a title="'. $title. '" style="align:center!important;text-align:center!important;font-size:10px;text-decoration:none;margin:0px!important;padding:0px!important;" href="'.$target_url.'">'.$title2.'</a></div>';
+	      $footer_html = '<a title="'. $title. '" style="align:center!important;text-align:center!important;font-size:10px;text-decoration:none;margin:0px!important;padding:0px!important;';
+	      $footer_html .= 'color:' . $text_color . ';" href="'.$target_url.'">'.$title2.'</a></div>';
        }
 
 	if($transparentflag == 1)
@@ -290,19 +372,10 @@ function my_weather_init()
 
     }
   
-    register_sidebar_widget('My Weather', 'my_weather');
-    register_widget_control('My Weather', 'my_weather_control', 245, 300);
-
 
 }
 
 
-add_action('plugins_loaded', 'my_weather_init');
-
-
-// This function print for selector weather 
-
-include("functions.php");
 
 
 ?>
