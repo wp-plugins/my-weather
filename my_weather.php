@@ -156,7 +156,7 @@ class my_weather extends WP_Widget
       		$background_color = htmlspecialchars($instance['background_color'], ENT_QUOTES);
       		
 		echo '<div style="align:center;text-align:center;margin-bottom:10px">';
-           	echo 'Weather<br> by <a href="http://openweather.com">openweather.com</a></div>';
+           	echo 'My Weather<br> by <a href="http://openweather.com">openweather.com</a></div>';
 
 
        		// Get country, state, city
