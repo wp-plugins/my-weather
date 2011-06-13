@@ -39,8 +39,8 @@ Display the weather for your city on the sidebar. Select from various layouts, d
 6. Medium Weather Widget  (default)
 7. Horizontal Forecast Widget (light blue color)
 8  Horizontal Forecast Widget (default)
-9.  Horizontal Forecast Widget (navy color)
-10.  Horizontal Forecast Widget (default)
+9.  Vertical Forecast Widget (navy color)
+10.  Vertical Forecast Widget (default)
 11.  Animated Forecast Widget (indigo color)
 12.  Animated Forecast Widget (default)
 13.  Admin Panel
