@@ -4,7 +4,7 @@ Donate link: http://www.openweather.com
 Tags: weather, temperature, forecast, city weather forecast
 Tested up to: 3.0.4
 Requires at least: 1.5
-Stable tag: trunk
+Stable tag: 1.1
 
 
 == Description ==
