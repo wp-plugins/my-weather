@@ -47,7 +47,7 @@ class my_weather extends WP_Widget
       function my_weather() 
       {
                 #Widget settings
-                $widget_ops = array( 'description' => __('A widget that displays your city weather', 'my_weather') );
+                $widget_ops = array( 'description' => __('Display city weather on the sidebar', 'my_weather') );
 
                 #Widget control settings
                 $control_ops = array( 'width' => 200, 'height' => 550, 'id_base' => 'my_weather' );

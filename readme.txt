@@ -9,11 +9,12 @@ Stable tag: 1.1
 
 == Description ==
 
-Display the weather for your city on the sidebar. Select from various layouts and designs
+Display the weather for your city on the sidebar. Select from various layouts, designs and colours
 
 * Select your country and city, check [openweather.com](http://openweather.com "Weather round the world") database of over 60,000 cities
 * Select from a range of small to large widget designs
 * Select centigrade or fahrenheit
+* Select custom text and backround colours
 * Examples of the weather widgets can be found at [openweather.com/wordpress](http://www.openweather.com/wordpress.phtml "wordpress weather plugins") 
 
 == Installation ==
@@ -49,7 +50,7 @@ Display the weather for your city on the sidebar. Select from various layouts an
 
 = 1.1 =
 * Released 13/06/2011
-* Upgraded plugin internals with Wordpress Widget Class for (i) multiple weather widgets, (ii) improved admin panel and (iii) compatibility with future Wordpress releases
+* Upgraded plugin internals with Wordpress Widget Class for (i) multiple weather widgets, (ii) customized colours, and (iii) compatibility with future Wordpress releases
 
 = 1.0 =
 * Released 10/01/2011
