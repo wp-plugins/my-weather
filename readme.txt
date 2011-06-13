@@ -43,7 +43,7 @@ Display the weather for your city on the sidebar. Select from various layouts, d
 10.  Horizontal Forecast Widget (default)
 11.  Animated Forecast Widget (indigo color)
 12.  Animated Forecast Widget (default)
-
+13.  Admin Panel
 
 
 == Changelog ==
