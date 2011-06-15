@@ -50,7 +50,7 @@ Display the weather for your city on the sidebar. Select from various layouts, d
 
 = 1.1 =
 * Released 13/06/2011
-* Upgraded plugin internals with Wordpress Widget Class for (i) multiple weather widgets, (ii) customized colours, and (iii) compatibility with future Wordpress releases
+* Upgraded plugin internals with Wordpress Widget Class for (i) multiple weather widgets on the same page, (ii) customized colours, and (iii) compatibility with future Wordpress releases
 
 = 1.0 =
 * Released 10/01/2011
