@@ -306,7 +306,7 @@ class my_weather extends WP_Widget
 
 	if($typeflag == "weather2000") $width = "130px";
 	elseif($typeflag == "weather2") $width = "180px";
-	elseif($typeflag == "weather100") $width = "100%";
+	elseif($typeflag == "weather100") $width = "175px";
 	elseif($typeflag == "weather1") $width = "480px";
 	elseif($typeflag == "weather3") $width = "150px";
 	elseif($typeflag == "weather1000") $width = "150px";
