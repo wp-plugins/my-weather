@@ -3,7 +3,7 @@ Contributors: enclick
 Donate link: http://www.openweather.com
 Tags: weather, weather forecast, meteo, el tiempo, wetter, temperature, forecast, city weather forecast
 Tested up to: 3.1.3
-Requires at least: 1.5
+Requires at least: 2.8
 Stable tag: 1.1
 
 
