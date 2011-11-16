@@ -244,7 +244,7 @@ class my_weather extends WP_Widget
 	     	$title_checked = "CHECKED";
 
 		echo "\n";
-		echo '<p><label for="' .$this->get_field_id( 'tflag' ). '"> Link to city\'s weather: 
+		echo '<p><label for="' .$this->get_field_id( 'tflag' ). '"> Link to ' . $city. '\'s weather: 
 	     <input type="checkbox" id="' .$this->get_field_id( 'tflag' ). '" name="' .$this->get_field_name( 'tflag' ). '" value=1 '.$title_checked.' /> 
 	     </label></p>';
 
