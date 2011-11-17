@@ -187,8 +187,9 @@ class my_weather extends WP_Widget
 			$transparent_checked = "CHECKED";
 
 		echo "\n";
-        echo '<p><label for="' .$this->get_field_id( 'transparentflag' ). '">Customize Colors: 
-	<input type="checkbox" id="' .$this->get_field_id( 'transparentflag' ). '" name="' .$this->get_field_name( 'transparentflag' ). '" value=1 '.$transparent_checked.' />* 
+        echo '<p><label for="' .$this->get_field_id( 'transparentflag' ). '">Customize Colors*: 
+	<input type="checkbox" id="' .$this->get_field_id( 'transparentflag' ). '" name="' .$this->get_field_name( 'transparentflag' ). '" value=1 '.$transparent_checked.' />
+     <span style="display:inline;font-size:9px">(save after selection)</span>
 	</label></p>';
 
 
@@ -244,7 +245,7 @@ class my_weather extends WP_Widget
 	     	$title_checked = "CHECKED";
 
 		echo "\n";
-		echo '<p><label for="' .$this->get_field_id( 'tflag' ). '"> Link to ' . $city. '\'s weather: 
+		echo '<p><label for="' .$this->get_field_id( 'tflag' ). '">  Title/Link to '. $city .' weather :
 	     <input type="checkbox" id="' .$this->get_field_id( 'tflag' ). '" name="' .$this->get_field_name( 'tflag' ). '" value=1 '.$title_checked.' /> 
 	     </label></p>';
 
@@ -293,7 +294,8 @@ class my_weather extends WP_Widget
 
 
 		// Output title
-		echo $before_title . $title . $after_title; 
+		#echo $before_title . $title . $after_title; 
+		echo $before_title .  $after_title; 
 
 
 		// Output weather
