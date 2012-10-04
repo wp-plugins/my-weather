@@ -4,8 +4,8 @@
   Description: Display your city's weather on your sidebar. Choice of widget designs and sizes.
   Author: enclick
   Version: 1.1
-  Author URI: http://openweather.com
-  Plugin URI: http://openweather.com/wordpress.phtml/
+  Author URI: http://weatherforecastmap.com
+  Plugin URI: http://weatherforecastmap.com/wordpress.phtml
 */
 
 require_once("functions.php");
@@ -304,7 +304,7 @@ class my_weather extends WP_Widget
 		$country_code = strtolower($country);
 
 
-		$target_url= "http://openweather.com/$country_name/";
+		$target_url= "http://weatherforecastmap.com/$country_name/";
 		$target_url .= $city ."/";
 		$target_url= str_replace(" ", "_", $target_url);
 		$target_url = strtolower($target_url);
@@ -322,7 +322,7 @@ class my_weather extends WP_Widget
 		elseif($typeflag == "weather3") $width = "150px";
 		elseif($typeflag == "weather1000") $width = "150px";
 
-		echo'<!--Weather in '. $city . ' ' . $country_name0.' widget - HTML code - openweather.com --><center>';
+		echo'<!--Weather in '. $city . ' ' . $country_name0.' widget - HTML code - weatherforecastmap.com --><center>';
 
 
 		if($typeflag == "weather2000" || $typeflag == "weather1000")
@@ -373,7 +373,7 @@ class my_weather extends WP_Widget
 			elseif($typeflag == "weather1000") $typeflag="weather1001";
 		}
 
-		$widget_call_string = 'http://openweather.com/' . $typeflag;
+		$widget_call_string = 'http://weatherforecastmap.com/' . $typeflag;
 		$widget_call_string .= '.php?zona='.$country_name;
 		$widget_call_string .= '_'.$city;
 		$widget_call_string = str_replace(" ", "-", $widget_call_string);
