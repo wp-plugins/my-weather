@@ -2,7 +2,7 @@
 Contributors: enclick
 Donate link: http://www.openweather.com
 Tags: weather, weather forecast, meteo, el tiempo, wetter, temperature, forecast, city weather forecast
-Tested up to: 3.5
+Tested up to: 3.6
 Requires at least: 2.8
 Stable tag: 1.1
 
